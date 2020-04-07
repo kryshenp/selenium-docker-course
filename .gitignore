@@ -2,6 +2,7 @@
 .idea
 selenium-docker2.iml
 /target
+.DSStore
 
 #VSCode generated files
 .settings
