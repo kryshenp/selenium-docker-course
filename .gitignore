@@ -1,3 +1,9 @@
-/target
-/.idea
+
+.idea
 selenium-docker2.iml
+/target
+
+#VSCode generated files
+.settings
+.classpath
+.project
