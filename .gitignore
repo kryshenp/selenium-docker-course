@@ -1,9 +1,12 @@
 
 .idea
+.vscode
 selenium-docker2.iml
 /target
+/output
+
 .DSStore
-.DS_Store
+
 
 #VSCode generated files
 .settings
@@ -12,4 +15,10 @@ selenium-docker2.iml
 
 
 build-plugins.txt
-/output
+/book-restult
+/search-restult
+/book-restult1
+/book-restult2
+/search-restult1
+/search-restult2
+.DS_Store
