@@ -1,37 +1,33 @@
 package com.newtours.tests;
 
 import com.newtours.pages.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import com.tests.BaseTest;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class BookFlightTests {
+public class BookFlightTests extends BaseTest {
 
-    private WebDriver driver;
     private String noOfPassengers;
     private String expectedPrice;
 
 
     @BeforeTest
     @Parameters({"noOfPassengers", "expectedPrice"})
-    public  void setupDriver(String noOfPassengers, String expectedPrice){
+    public  void setupParameters(String noOfPassengers, String expectedPrice){
         this.noOfPassengers = noOfPassengers;
         this.expectedPrice = expectedPrice;
-
-        System.setProperty("webdriver.chrome.driver", "../../chromedriver");
-        this.driver = new ChromeDriver();
     }
 
     @Test
-    public void registrationPage(){
+    public void registrationPage() throws InterruptedException {
         RegistrationPage registrationPage = new RegistrationPage(driver);
         registrationPage.goTo();
         registrationPage.enterUserDetails("selenium", "docker");
         registrationPage.enterUserCredentials("selenium", "docker");
+
+        Thread.sleep(20000);
         registrationPage.submit();
     }
 
@@ -60,10 +56,5 @@ public class BookFlightTests {
         FlightConfirmationPage flightConfirmationPage = new FlightConfirmationPage(driver);
         String actualPrice = flightConfirmationPage.getPrice();
         Assert.assertEquals(actualPrice, expectedPrice);
-    }
-
-    @AfterTest
-    public void quitBrowser(){
-        this.driver.quit();
     }
 }
