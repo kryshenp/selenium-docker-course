@@ -10,6 +10,8 @@ services:
             - hub
         environment: 
             - HUB_HOST=hub
+        volumes:
+            - ./downloads:/home/seluser/Downloads
     firefox:
         image: selenium/node-firefox:3.14
         shm_size: '1gb'
@@ -17,6 +19,8 @@ services:
             - hub
         environment: 
             - HUB_HOST=hub
+        volumes: 
+            - ./downloads:/home/seluser/Downloads
     search-module1:
         image: kryshenp/selenium-docker
         depends_on: 

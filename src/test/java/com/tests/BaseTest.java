@@ -3,6 +3,7 @@ package com.tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterTest;
@@ -16,7 +17,7 @@ public class BaseTest {
 
 
     @BeforeTest
-    public  void setupDriver(ITestContext ctx) throws MalformedURLException {
+    public  void setupDriver(final ITestContext ctx) throws MalformedURLException {
 
         // BROWSER => chrome / firefox
         // HUB_HOST =>  localhost / 10.0.1.2 / hostname
@@ -31,13 +32,17 @@ public class BaseTest {
             dc =  DesiredCapabilities.chrome();
         }
 
-        if(System.getProperty("HUB_HOST") != null){
+        if (System.getProperty("HUB_HOST") != null) {
             host = System.getProperty("HUB_HOST");
         }
+        
+        if(driver instanceof RemoteWebDriver){
+            ((RemoteWebDriver) driver).setFileDetector(new LocalFileDetector());
+         }
 
-        String testName = ctx.getCurrentXmlTest().getName();
+        final String testName = ctx.getCurrentXmlTest().getName();
 
-        String completeURL = "http://" + host + ":4444/wd/hub";
+        final String completeURL = "http://" + host + ":4444/wd/hub";
         dc.setCapability("name", testName);
         this.driver = new RemoteWebDriver(new URL(completeURL), dc);
     }
