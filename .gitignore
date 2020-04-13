@@ -9,3 +9,7 @@ selenium-docker2.iml
 .settings
 .classpath
 .project
+
+
+build-plugins.txt
+/output
